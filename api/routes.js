@@ -22,6 +22,11 @@ router.param("id", function(req,res,next,id){
 // AUTHENTHICATE USERS
 const authUser = (req, res, next) => {
 
+  if(authorized(req) == null){
+        const err = new Error("username and password required");
+        err.status = 401;
+        next(err);
+  }
   User.findOne({ emailAddress: authorized(req).name}, function(err, user){
     if(user) {
       const auth = bcrypt.compareSync(authorized(req).pass, user.password);
@@ -65,9 +70,9 @@ router.get("/courses/:id", function(req, res,) {
 //POST COURSE
 // ROUTE FOR CREATING COURSE
 router.post("/courses", authUser, function(req, res, next) {
-  
+  const user = req.currentUser
   const course = new Course({
-    user: req.currentUser._id, 
+    user: user._id, 
     title: req.body.title,
     description: req.body.description,
     estimatedTime: req.body.estimatedTime,
