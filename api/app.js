@@ -4,6 +4,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require("cors");
 const jsonParser = require("body-parser");
 const routes = require("./routes");
 const app = express(); // create the Express app
@@ -11,6 +12,8 @@ const app = express(); // create the Express app
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
 
+//Enable cors for all request
+app.use(cors());
 
 //use jsonparser to accept json data coming into the routes
 app.use(jsonParser.json());
