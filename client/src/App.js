@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './global.css';
 import axios from "axios";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
