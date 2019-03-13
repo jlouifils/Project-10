@@ -1,30 +1,40 @@
-import React, { Component } from 'react';
-import './global.css';
+import React from "react";
+import "./global.css";
 import axios from "axios";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {
+  //import BrowserRouter and Route
+  BrowserRouter,
+  Route,
+  Switch
+} from "react-router-dom";
 
-//import App Components
+
+//import Components
 import Header from "./components/Header";
 import Courses from "./components/courseAction/Courses";
 import CourseDetail from "./components/courseAction/CourseDetail";
+import UserSignIn from "./components/userAction/UserSignIn";
+import UserSignUp from "./components/userAction/UserSignUp";
 import CreateCourse from "./components/userAction/CreateCourse";
 import UpdateCourse from "./components/userAction/UpdateCourse";
-import UserSignIn from "./components/userAction/UserSignIn";
 import UserSignOut from "./components/userAction/UserSignOut";
-import UserSignUp from "./components/userAction/UserSignUp";
 
 
-
-class App extends Component {
-  constructor(){
+export default class App extends React.Component {
+  //Class components need to extend  React.Component, and class components require the render()
+  constructor() {
+    //state for data we want to display from api
     super();
-    this.state ={
+    this.state = {
+      //set initial state to a empty array called courses
       courses: []
     };
-  }   
+  }
+
   componentDidMount() {
-    axios.get("http://localhost:5000/api/courses")
-    .then(results =>{
+    //fetch data from API
+    axios.get("http://localhost:5000/api/courses").then(results => {
+      //  console.log(results), this lets me know that I was able to grab my api data
       this.setState({
         courses: results.data
       });
@@ -33,22 +43,22 @@ class App extends Component {
 
   render() {
     return (
-    <BrowserRouter>
-      <Switch>
-          <div>
-            <Header title = "Sign Up For Courses"/>
-              <Route path="/" component={Courses} />
-              <Route path="/courses/create" component={CreateCourse} />
-              <Route path="/courses/:id/update" component={UpdateCourse} />
-              <Route path="/courses/:id" component={CourseDetail} />
-              <Route path="/signin" component={UserSignIn} />
-              <Route path="/signup" component={UserSignUp} />
-              <Route path="/signOUT" component={UserSignOut} />
-          </div>
-        </Switch>
+      //JSX inside
+      <BrowserRouter>
+        <div>
+          <Header title="Sign Up For Courses" />
+          <Switch>
+            <Route exact path="/" component={Courses} />
+            <Route exact path="/courses/create" component={CreateCourse} />
+            <Route exact path="/courses/:id/update" component={UpdateCourse} />
+            <Route exact path="/courses/:id" component={CourseDetail} />
+            <Route exact path="/signin" component={UserSignIn} />
+            <Route exact path="/signup" component={UserSignUp} />
+            <Route exact path="/signout" component={UserSignOut} />
+          </Switch>
+        </div>
       </BrowserRouter>
     );
   }
 }
 
-export default App;

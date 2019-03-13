@@ -49,7 +49,7 @@ export default class UpdateCourse extends React.Component {
     };
 
     handleCancel = (evt) => {
-        var {match:{ params }, history } = this.props;
+        var {match: history } = this.props;
         var { course } = this.state;
         evt.preventDefault();
         history.push(`/courses/${course._id}`)
@@ -68,7 +68,7 @@ export default class UpdateCourse extends React.Component {
     }
 
     render() {
-        const { course, user } = this.state;;
+        const { course, } = this.state;;
          return ( 
           <div>
           <hr />
