@@ -1,6 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import  axios  from "axios";
-import { Navlink } from 'react-router-dom';
+
 
 
 
@@ -26,12 +27,12 @@ export default class UpdateCourse extends React.Component {
         })
     }
     handleSubmit = (e) => {
-        var {match:{ params }} = this.props;
-        e.preventDefault();
+      const {match: { params }} = this.props;
+      e.preventDefault();
 // found a website that help better use of axios https://kapeli.com/cheat_sheets/Axios.docset/Contents/Resources/Documents/index
         axios ({
             method: 'put',
-            url: 'http://localhost:5000/api/courses/${params.id}',
+            url: `http://localhost:5000/api/courses/${params.id}`,
             data: {
                 title: this.state.title,
                 description: this.state.description,
@@ -40,17 +41,18 @@ export default class UpdateCourse extends React.Component {
                 }
         })
         .then(alert('course updated!')
-        ).then( () => {
-            const { history } = this.props;
-            history.push('/api')
+        )
+        .then( () => {
+            var { history } = this.props;
+            history.push('/')
         })
     };
 
     handleCancel = (evt) => {
         var {match:{ params }, history } = this.props;
-        var course = this.state;
+        var { course } = this.state;
         evt.preventDefault();
-        history.push('/course/${course._id}')
+        history.push(`/courses/${course._id}`)
     }
     componentDidMount() {
         const {match: { params }} = this.props;
@@ -66,7 +68,7 @@ export default class UpdateCourse extends React.Component {
     }
 
     render() {
-        const { user, course} = this.state; 
+        const { course, user } = this.state;;
          return ( 
           <div>
           <hr />

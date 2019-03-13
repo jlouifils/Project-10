@@ -27,7 +27,10 @@ export default class UserSignUp extends React.Component {
                 password: this.state.password,
                 confirmPassword: this.state.confirmPassword
               }
-        }).then( () =>{
+        }).then(
+            alert('Your account was successfully created!')
+            )
+            .then( () =>{
             const { history } =this.props;
             history.push('/')
         })
@@ -37,7 +40,7 @@ export default class UserSignUp extends React.Component {
         this.state({
             [event.target.name]:event.target.value
         })
-    }
+    };
 
     render(){
          return(
@@ -53,15 +56,16 @@ export default class UserSignUp extends React.Component {
               <div><input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" value={this.state.emailAddress} onChange={e => this.change(e)} /></div>
               <div><input id="password" name="password" type="password" className="" placeholder="Password" value={this.state.password} onChange={e => this.change(e)} /></div>
               <div><input id="confirmPassword" name="confirmPassword" type="password" className="" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={e => this.change(e)} /></div>
-              <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign Up</button><NavLink to='/' className="button button-secondary">Cancel</NavLink></div>
+              <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign Up</button>
+                <NavLink to='/' className="button button-secondary">Cancel</NavLink></div>
             </form>
           </div>
           <p>&nbsp;</p>
-          <p>Already have a user account? <NavLink to='/signin'>Click here</NavLink> to sign in!</p>
+          <p>Already have a user account? 
+              <NavLink to='/signin'>Click here</NavLink> to sign in!</p>
         </div>
       </div>
     </div>
         );
     }
-    
 }

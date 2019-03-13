@@ -15,9 +15,11 @@ export default class CourseDetail extends React.Component {
     componentDidMount() {
         const { match: { params } } =this.props
         axios.get(`http://localhost:5000/api/courses/${params.id}`)
-        .then(({data: course}) => {
-          this.setState({course})
+        .then(results => {
+          this.setState({course: results.data,
+          user: results.data.user
         });
+      });
     }
 
     handleDelete() {
