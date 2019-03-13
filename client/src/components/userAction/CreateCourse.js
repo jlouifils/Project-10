@@ -39,7 +39,7 @@ export default class CreateCourse extends React.Component {
             .then(alert('course created!'))
             .then( ()=> {
                 const { history } =this.props;
-                history.push('/api')
+                history.push('/')
             })
         };
         
