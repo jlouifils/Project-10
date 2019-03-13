@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
-class CourseDetail extends Component {
+export default class CourseDetail extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {course: [] };
+      this.state = {course: [],
+      user: [] };
+
+      this.handleDelete = this.handleDelete.bind(this);
     }
 
     // got this info from erik from the slack that he post about Route Params
@@ -40,11 +43,7 @@ class CourseDetail extends Component {
                   Delete Course
                 </NavLink>
               </span>
-              <NavLink
-                to="/"
-                className="button button-secondary"
-                href="index.html"
-              >
+              <NavLink to="/"className="button button-secondary"href="index.html">
                 Return to List
               </NavLink>
             </div>
@@ -55,13 +54,9 @@ class CourseDetail extends Component {
             <div className="course--header">
               <h4 className="course--label">Course</h4>
               <h3 className="course--title">{course.title}</h3>
-              <p>This course was created by:  {course.user}</p>
             </div>
             <div className="course--description">
-              <p>
-                {course.description}
-              </p>
-              
+              <p>{course.description}</p>
             </div>
           </div>
           <div className="grid-25 grid-right">
@@ -75,7 +70,6 @@ class CourseDetail extends Component {
                   <h4>Materials Needed</h4>
                   <ul>
                     <li>{course.materialsNeeded}</li>
-
                   </ul>
                 </li>
               </ul>
@@ -86,5 +80,3 @@ class CourseDetail extends Component {
     );
   }
 }
-
-export default CourseDetail;
