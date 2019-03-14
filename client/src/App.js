@@ -1,15 +1,8 @@
 import React from "react";
 import "./global.css";
 import axios from "axios";
-import {
-  //import BrowserRouter and Route
-  BrowserRouter,
-  Route,
-  Switch
-} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-
-//import Components
 import Header from "./components/Header";
 import Courses from "./components/courseAction/Courses";
 import CourseDetail from "./components/courseAction/CourseDetail";
@@ -21,20 +14,15 @@ import UserSignOut from "./components/userAction/UserSignOut";
 
 
 export default class App extends React.Component {
-  //Class components need to extend  React.Component, and class components require the render()
   constructor() {
-    //state for data we want to display from api
     super();
     this.state = {
-      //set initial state to a empty array called courses
       courses: []
     };
   }
 
   componentDidMount() {
-    //fetch data from API
     axios.get("http://localhost:5000/api/courses").then(results => {
-      //  console.log(results), this lets me know that I was able to grab my api data
       this.setState({
         courses: results.data
       });
@@ -43,7 +31,6 @@ export default class App extends React.Component {
 
   render() {
     return (
-      //JSX inside
       <BrowserRouter>
         <div>
           <Header title="Sign Up For Courses" />
@@ -61,4 +48,5 @@ export default class App extends React.Component {
     );
   }
 }
+
 

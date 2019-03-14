@@ -18,7 +18,6 @@ export default class Courses extends React.Component {
         this.setState({ 
          courses: results.data
       })
-      console.log(results)
       })
      }
      

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'; 
-
+import axios from 'axios';
 
 
 
@@ -9,16 +9,38 @@ export default class UserSignIn extends Component {
       super(props);
 
       this.state = {
-        userSign: '' 
+        emailAddress: '',
+        password: '' 
       };
     }   
   
-    componentDidMount() {
-      
-     }
+    signIn(emailAddress, password) {
+      axios.get("http://localhost:5000/api/users", {
+        auth: {
+          username: emailAddress,
+          password: password
+        }
+      }).then(results => {
+        this.setState({
+          emailAddress: results.data,
+          password: results.data.user
+        });
+      }).then(
+        alert('Sign in successful')
+      )
+      .then( () => {
+        const {  history } = this.props;
+        history.push(`/`)
+      })
+    }
+  
+    change = (evt)=> {
+      this.setState({
+        [evt.target.name]: evt.target.value
+      })
+    }
      
      render() {
-       const{userSign} = this.state; 
        return ( 
         <div>
       <hr/>
