@@ -64,7 +64,7 @@ export default class UserSignUp extends React.Component {
             </form>
           </div>
           <p>&nbsp;</p>
-          <p>Already have a user account? <NavLink to='/signin'>Click here</NavLink> to sign in!</p>
+          <p>Already have a user account? <NavLink to='/UserSignIn'>Click here</NavLink> to sign in!</p>
         </div>
       </div>
     </div>
