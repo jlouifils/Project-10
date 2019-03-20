@@ -33,7 +33,7 @@ export default class UserSignUp extends React.Component {
           alert('Your account has been made!')
         ).then( () => {
           const {  history } = this.props;
-          history.push(`/api`)
+          history.push('/UserSignIn')
         })
     };
 

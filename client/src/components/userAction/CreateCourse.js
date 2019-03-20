@@ -29,6 +29,10 @@ export default class CreateCourse extends React.Component {
         axios({
             method: 'post',
             url: 'http://localhost:5000/api/courses',
+            auth: {
+              username: window.localStorage.getItem("Email"),
+              password: window.localStorage.getItem("Password")
+            },
             data: {
                 title: this.state.title,
                 description: this.state.description,

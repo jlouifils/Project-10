@@ -33,6 +33,10 @@ export default class UpdateCourse extends React.Component {
         axios ({
             method: 'put',
             url: `http://localhost:5000/api/courses/${params.id}`,
+            auth: {
+              username: window.localStorage.getItem('Email'),
+              password: window.localStorage.getItem('Password')
+           },
             data: {
                 title: this.state.title,
                 description: this.state.description,
@@ -43,13 +47,12 @@ export default class UpdateCourse extends React.Component {
         .then(alert('course updated!')
         )
         .then( () => {
-            var { history } = this.props;
-            history.push('/')
+            this.props.history.push('/')
         })
     };
 
     handleCancel = (evt) => {
-        var {match: history } = this.props;
+        var { history } = this.props;
         var { course } = this.state;
         evt.preventDefault();
         history.push(`/courses/${course._id}`)
