@@ -38,7 +38,6 @@ export default class App extends React.Component {
       window.localStorage.setItem('Email',userInfo.emailAddress)
       window.localStorage.setItem('Password',userInfo.password)
       window.localStorage.setItem('UserId', JSON.stringify(results.data.user_id))
-      console.log('UserId')
       window.localStorage.setItem('IsLoggedIn', JSON.stringify(true))
       window.location.assign('/')
     })
