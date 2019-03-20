@@ -14,7 +14,8 @@ export default class UpdateCourse extends React.Component {
         title: '', 
         description: '',
         estimatedTime: '',
-        materialsNeeded: ''
+        materialsNeeded: '',
+        errors: []
         };
         // found out how to use this.handleSubmit/Cancel on stackoverflow https://stackoverflow.com/questions/41507337/in-redux-when-do-i-need-to-use-bindthis
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,12 +44,20 @@ export default class UpdateCourse extends React.Component {
                 estimatedTime: this.state.estimatedTime,
                 materialsNeeded: this.state.materialsNeeded
                 }
+        }).then(response => { 
+          if (response.status === 204) {
+            alert(" Course successfully updated!");
+            this.props.history.push("/");
+          } else {
+            throw new Error();
+          }
         })
-        .then(alert('course updated!')
-        )
-        .then( () => {
-            this.props.history.push('/')
-        })
+        .catch(err => {
+          console.log("CATCH =", err.response.data.errors);
+          this.setState({
+            errors: err.response.data.errors
+          });
+        });
     };
 
     handleCancel = (evt) => {
@@ -71,44 +80,51 @@ export default class UpdateCourse extends React.Component {
     }
 
     render() {
-        const { course, } = this.state;;
-         return ( 
-          <div>
-          <hr />
-          <div className="bounds course--detail">
-            <h1>Update Course</h1>
-            <div>
-              <form onSubmit={ this.handleSubmit}>
-                <div className="grid-66">
-                  <div className="course--header">
-                    <h4 className="course--label">Course</h4>
-                    <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={course.title}  onChange={e => this.change(e)} /></div>
-                  </div>
-                  <div className="course--description">
-                    <div><textarea id="description" name="description"  placeholder="Course description..." defaultValue={this.state.course.description} onChange={e => this.change(e)}/> </div>
-                  </div>
-                </div>
-                <div className="grid-25 grid-right">
-                  <div className="course--stats">
-                    <ul className="course--stats--list">
-                      <li className="course--stats--list--item">
-                        <h4>Estimated Time</h4>
-                        <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" defaultValue={course.estimatedTime} onChange={e => this.change(e)} /></div>
-                      </li>
-                      <li className="course--stats--list--item">
-                        <h4>Materials Needed</h4>
-                        <div><textarea id="materialsNeeded" name="materialsNeeded" placeholder="List materials..." defaultValue={this.state.course.materialsNeeded}  onChange={e => this.change(e)} /></div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick={this.handleCancel}>Cancel</button></div>
-              </form>
-            </div>
-          </div>
-        </div> 
-       );
-      } 
-    
-}
+      
+   const errors = this.state.errors; 
+   const errorList = errors.map((error) =>
+     <li key={error.toString()}>{error}</li>);
+     const { course, user } = this.state;
 
+      return ( 
+       <div>
+       <hr />
+       <div className="bounds course--detail">
+         <h1>Update Course</h1>
+         <div className="validation-errors">
+             <ul>{errorList}</ul>
+           </div>
+         <div>
+           <form onSubmit={ this.handleSubmit}>
+             <div className="grid-66">
+               <div className="course--header">
+                 <h4 className="course--label">Course</h4>
+                 <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={course.title}  onChange={e => this.change(e)} /></div>
+                 <p>By {user.firstName} {user.lastName}</p>
+               </div>
+               <div className="course--description">
+                 <div><textarea id="description" name="description"  placeholder={this.state.course.description} onChange={e => this.change(e)}/> </div>
+               </div>
+             </div>
+             <div className="grid-25 grid-right">
+               <div className="course--stats">
+                 <ul className="course--stats--list">
+                   <li className="course--stats--list--item">
+                     <h4>Estimated Time</h4>
+                     <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" defaultValue={this.state.course.estimatedTime} onChange={e => this.change(e)} /></div>
+                   </li>
+                   <li className="course--stats--list--item">
+                     <h4>Materials Needed</h4>
+                     <div><textarea id="materialsNeeded" name="materialsNeeded" placeholder={this.state.course.materialsNeeded}  onChange={e => this.change(e)} /></div>
+                   </li>
+                 </ul>
+               </div>
+             </div>
+             <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick={this.handleCancel}>Cancel</button></div>
+           </form>
+         </div>
+       </div>
+     </div> 
+    );
+   } 
+  }

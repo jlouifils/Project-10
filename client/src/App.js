@@ -31,13 +31,13 @@ export default class App extends React.Component {
         username: userInfo.emailAddress,
         password: userInfo.password
       }
-    }).then(results => {
+    }).then(results => { console.log(results.data)
       //brain ball help undertand how to use windoow.localStorage in my projrect https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
-      window.localStorage.setItem('FirstName',userInfo.firstName)
-      window.localStorage.setItem('LastName', userInfo.lastName)
+      window.localStorage.setItem('FirstName',results.data.firstName)
+      window.localStorage.setItem('LastName', results.data.lastName)
       window.localStorage.setItem('Email',userInfo.emailAddress)
       window.localStorage.setItem('Password',userInfo.password)
-      window.localStorage.setItem('UserId', JSON.stringify(userInfo.user_id))
+      window.localStorage.setItem('UserId', JSON.stringify(results.data.user_id))
       console.log('UserId')
       window.localStorage.setItem('IsLoggedIn', JSON.stringify(true))
       window.location.assign('/')

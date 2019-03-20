@@ -107,8 +107,8 @@ router.put("/courses/:id", authUser,  function(req, res, next) {
     })
   
   .exec()
-  .then(result =>{
-    res.status(204).json(result);
+  .then(results =>{
+    res.status(204).json(results);
   })
    .catch(err => {
   console.log(err);
@@ -123,8 +123,8 @@ router.delete("/courses/:id", authUser,  function(req, res,) {
   const id = req.params.id;
   Course.remove({_id: id})
   .exec()
-  .then(result =>{
-    res.status(204).json(result);
+  .then(results =>{
+    res.status(204).json(results);
   })
    .catch(err => {
   console.log(err);
@@ -155,8 +155,8 @@ router.post("/users", function(req, res,) {
     emailAddress: req.body.emailAddress,
     password: bcrypt.hashSync(req.body.password),
   });
-  user.save().then(result =>{
-    console.log(result);
+  user.save().then(results =>{
+    console.log(results);
     res.location('/api');
     res.status(201).json('User Created!');
   })
