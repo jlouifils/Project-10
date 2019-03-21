@@ -10,7 +10,7 @@ const Header = () =>
             <div className="bounds">
                 <NavLink to='/' className="header--logo">Courses</NavLink>
               <nav>
-                  <span>{`welcome back`}!</span><Link className='signup' to={'/UsersignOut'}>Sign out</Link>
+                  <span>{`welcome back ${localStorage.getItem('FirstName')}  ${localStorage.getItem('LastName')}`}!</span><Link className='signup' to={'/UsersignOut'}>Sign out</Link>
                 </nav>
             </div>
          </div> 
@@ -22,6 +22,7 @@ const Header = () =>
                 <NavLink to='/' className="header--logo">Courses</NavLink>
                     <nav>
                     <Link className="signin" to={'/UserSignIn'}>Sign In</Link>
+                    <Link className="signup" to={'/UserSignUp'}>Sign Up</Link>
                     </nav>
             </div>
         </div>

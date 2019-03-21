@@ -142,7 +142,7 @@ router.get("/users", authUser, function(req, res, next) {
   User.find({})
               .exec(function(err,users){
                   if(err) return next(err);
-                  res.json(users);
+                  res.json(req.currentUser);
               });
 });
 
