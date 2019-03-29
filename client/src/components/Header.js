@@ -10,7 +10,7 @@ const Header = () =>
             <div className="bounds">
                 <NavLink to='/' className="header--logo">Courses</NavLink>
               <nav>
-                  <span>{`welcome back ${localStorage.getItem('FirstName')}  ${localStorage.getItem('LastName')}`}!</span><Link className='signup' to={'/UsersignOut'}>Sign out</Link>
+                  <span>{`what's crakin ${localStorage.getItem('FirstName')}  ${localStorage.getItem('LastName')}`}!</span><Link className='signup' to={'/UsersignOut'}>Sign out</Link>
                 </nav>
             </div>
          </div> 

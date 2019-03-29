@@ -24,7 +24,7 @@ export default class App extends React.Component {
   }
 
   // also found this on a different website https://medium.com/technoetics/create-basic-login-forms-using-create-react-app-module-in-reactjs-511b9790dede
-  // @EmmaW told me that moving my signIn method to my app.js would better
+  // @EmmaW told me that moving my signIn method to my app.js was better
   signIn(userInfo) {
     axios.get("http://localhost:5000/api/users", {
       auth: {
